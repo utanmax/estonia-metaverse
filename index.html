@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estonia Metaverse - Digital Nation Initiative</title>
-    <meta name="description" content="The official digital infrastructure for Estonia's national metaverse initiative. Building the future of digital governance.">
+    <meta name="description" content="The official digital infrastructure for Estonia's national metaverse initiative. Building the future of digital governance and e-residency programs.">
     <meta property="og:title" content="Estonia Metaverse - Digital Nation Initiative">
     <meta property="og:description" content="The future of digital governance and virtual citizenship">
     <meta property="og:image" content="https://via.placeholder.com/1200x630/0D1117/00D9FF?text=ESTONIA+METAVERSE">
@@ -26,6 +26,23 @@
             color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
+        }
+        
+        /* Skip to main content per accessibilità */
+        .skip-to-main {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #00D9FF;
+            color: #0D1117;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 1000;
+        }
+        
+        .skip-to-main:focus {
+            top: 6px;
         }
         
         /* Animated gradient background */
@@ -57,6 +74,13 @@
         @keyframes grid-move {
             0% { transform: translate(0, 0); }
             100% { transform: translate(50px, 50px); }
+        }
+        
+        /* Riduci motion per utenti con preferenze di accessibilità */
+        @media (prefers-reduced-motion: reduce) {
+            .grid-overlay {
+                animation: none;
+            }
         }
         
         .container {
@@ -97,6 +121,7 @@
             min-height: calc(100vh - 300px);
             text-align: center;
             padding: 40px 0;
+            outline: none;
         }
         
         h1 {
@@ -114,6 +139,7 @@
             color: #8B949E;
             margin-bottom: 40px;
             max-width: 600px;
+            line-height: 1.4;
         }
         
         .status {
@@ -176,10 +202,13 @@
             letter-spacing: 1px;
         }
         
-        .btn-contact:hover {
+        .btn-contact:hover,
+        .btn-contact:focus {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4);
             background: linear-gradient(135deg, #00E5FF 0%, #00AADD 100%);
+            outline: 2px solid #00D9FF;
+            outline-offset: 2px;
         }
         
         footer {
@@ -250,33 +279,48 @@
         .glow-on-hover:hover:before {
             opacity: 1;
         }
+        
+        /* Screen reader only text */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    
     <div class="bg-gradient"></div>
-    <div class="grid-overlay"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
     
     <div class="container">
-        <header>
+        <header role="banner">
             <div class="logo">Estonia Metaverse</div>
             <p class="tagline">Digital Nation Infrastructure</p>
         </header>
         
-        <main>
+        <main id="main-content" tabindex="-1">
             <h1>Building Estonia's Digital Future</h1>
             <p class="subtitle">
-                Securing critical infrastructure for the world's first digital nation metaverse initiative
+                Digital nation infrastructure for Estonia's pioneering e-governance initiatives, digital citizenship programs, and e-residency expansion in the metaverse ecosystem
             </p>
             
-            <div class="status">
-                <span class="status-dot"></span>
-                <span>Development Phase</span>
+            <div class="status" role="status" aria-live="polite">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>Digital Nation Development Phase</span>
             </div>
             
             <div class="cta">
                 <h2>Strategic Partnership Inquiries</h2>
                 <p>
-                    For government bodies, institutional partners, and strategic stakeholders interested in Estonia's digital nation initiative.
+                    For government bodies, institutional partners, technology companies, and strategic stakeholders interested in Estonia's digital nation initiative and e-governance pioneering programs.
                 </p>
                 <a href="https://mdh-digital.net" class="btn-contact glow-on-hover" target="_blank" rel="noopener noreferrer">
                     Contact Us
@@ -284,7 +328,7 @@
             </div>
         </main>
         
-        <footer>
+        <footer role="contentinfo">
             <img src="logo-mdh.svg" alt="MDH Digital" class="footer-logo">
             <p>&copy; 2025 MDH Digital Initiative. All rights reserved.</p>
             <p class="company">A Digital Nation Holdings Initiative</p>
